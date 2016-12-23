@@ -14,7 +14,7 @@ class PhotoAlbum {
     
     var assetCollection: PHAssetCollection!
     
-    init(name albumName: String) {
+    init(name albumName: String, callback: ((Bool, PhotoAlbum) -> Void)? = nil) {
         
         self.albumName = albumName
         
@@ -33,6 +33,8 @@ class PhotoAlbum {
         
         if let assetCollection = fetchAssetCollectionForAlbum() {
             self.assetCollection = assetCollection
+            
+            callback?(true, self)
             return
         }
         
@@ -43,6 +45,7 @@ class PhotoAlbum {
                 self.assetCollection = fetchAssetCollectionForAlbum()
                 
             }
+            callback?(success, self)
         }
         
     }
@@ -73,6 +76,23 @@ class PhotoAlbum {
         PHPhotoLibrary.shared().performChanges({
             let assetChangeRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
             let assetPlaceholder = assetChangeRequest.placeholderForCreatedAsset
+            let albumChangeRequest = PHAssetCollectionChangeRequest(for: self.assetCollection)
+            let enumeration: NSArray = [assetPlaceholder!]
+            albumChangeRequest?.addAssets(enumeration)
+        }, completionHandler: { success, err in
+            callback(success)
+        })
+    }
+    
+    func save(URL: URL,callback: @escaping (Bool) -> Void) {
+        guard assetCollection != nil else {
+            callback(false)
+            return
+        }
+        
+        PHPhotoLibrary.shared().performChanges({
+            let assetChangeRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: URL)
+            let assetPlaceholder = assetChangeRequest?.placeholderForCreatedAsset
             let albumChangeRequest = PHAssetCollectionChangeRequest(for: self.assetCollection)
             let enumeration: NSArray = [assetPlaceholder!]
             albumChangeRequest?.addAssets(enumeration)

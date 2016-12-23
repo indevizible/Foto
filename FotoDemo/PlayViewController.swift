@@ -38,6 +38,7 @@ class PlayViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
 
     @IBAction func exportToGif(_ sender: UIButton) {
         let size = CGSize(all: 256)
@@ -45,27 +46,40 @@ class PlayViewController: UIViewController {
         let images = fetchedImages?.map { $0.image(size: size) }
         
         if let imgs = images, let libUrl = FileManager.default.urls(for: .libraryDirectory, in: .allDomainsMask).first {
-            let finalURL = libUrl.appendingPathComponent("test.gif")
+            let finalURL = libUrl.appendingPathComponent("x.gif")
+            
+            do {
+                try FileManager.default.removeItem(at: finalURL)
+            }catch{
+                
+            }
             GifGenerator().generateGifFromImages(imagesArray: imgs, frameDelay: 0.3, destinationURL: finalURL, callback: { (data, error) in
-                if let _ = data {
-                    PhotoAlbum.save(URL: finalURL) { isSuccess in
-                        
-                        if isSuccess {
-                            let alertController  = UIAlertController(title: "Successful", message: "Gif saved in your camera roll", preferredStyle: .alert)
-                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                
+                
+                if error == nil {
+                    _ = PhotoAlbum(name: "Foto Demo") { success, album in
+                        album.save(URL: finalURL) { success in
+                            if success {
+                                let alertController  = UIAlertController(title: "Successful", message: "Gif saved in your camera roll", preferredStyle: .alert)
+                                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                                 
-                            OperationQueue.main.addOperation {
-                                self.present(alertController, animated: true, completion: nil)
+                                OperationQueue.main.addOperation {
+                                    self.present(alertController, animated: true, completion: nil)
+                                }
+                            }else{
+                                print("Cannot save")
+                            }
+                            
+                            do {
+                                try FileManager.default.removeItem(at: finalURL)
+                            }catch{
+                                print("can not remove")
                             }
                         }
-                        
-                        do {
-                            try FileManager.default.removeItem(at: finalURL)
-                        }catch{
-                            print("can not remove")
-                        }
-                    
                     }
+
+                }else{
+                    print(error!)
                 }
             })
         }
