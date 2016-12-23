@@ -111,6 +111,14 @@ class PhotoAlbum {
         }
     }
     
+    static func save(URL: URL, callback: @escaping (Bool) -> Void) {
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: URL)
+        }, completionHandler: { success, err in
+            callback(success)
+        })
+    }
+    
 }
 
 extension PHAsset {

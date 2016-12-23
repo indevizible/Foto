@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class PlayViewController: UIViewController {
 
@@ -22,7 +23,7 @@ class PlayViewController: UIViewController {
         if let photoAlbum = photoAlbum {
             
             OperationQueue.current?.addOperation{
-                let imgs = photoAlbum.fetchImages()?.map { $0.image(size: self.imageView.frame.size) } ?? [#imageLiteral(resourceName: "no-image")]
+                let imgs = photoAlbum.fetchImages()?.map { $0.image(size: self.imageView.frame.size.screenSize()) } ?? [#imageLiteral(resourceName: "no-image")]
                 self.imageView.animationImages = imgs
                 
                 OperationQueue.main.addOperation {
@@ -33,12 +34,45 @@ class PlayViewController: UIViewController {
                 }
             }
             
-            
         }
         
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func exportToGif(_ sender: UIButton) {
+        let size = CGSize(all: 256)
+        let fetchedImages = photoAlbum?.fetchImages()
+        let images = fetchedImages?.map { $0.image(size: size) }
+        
+        if let imgs = images, let libUrl = FileManager.default.urls(for: .libraryDirectory, in: .allDomainsMask).first {
+            let finalURL = libUrl.appendingPathComponent("test.gif")
+            GifGenerator().generateGifFromImages(imagesArray: imgs, frameDelay: 0.3, destinationURL: finalURL, callback: { (data, error) in
+                if let _ = data {
+                    PhotoAlbum.save(URL: finalURL) { isSuccess in
+                        
+                        if isSuccess {
+                            let alertController  = UIAlertController(title: "Successful", message: "Gif saved in your camera roll", preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                                
+                            OperationQueue.main.addOperation {
+                                self.present(alertController, animated: true, completion: nil)
+                            }
+                        }
+                        
+                        do {
+                            try FileManager.default.removeItem(at: finalURL)
+                        }catch{
+                            print("can not remove")
+                        }
+                    
+                    }
+                }
+            })
+        }
+
+    }
+    
+    
     @IBAction func sliding(_ sender: UISlider) {
         imageView.animationDuration = TimeInterval(slider.value)
         imageView.startAnimating()

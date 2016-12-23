@@ -17,6 +17,7 @@
 		90C6434F1E0CB97D0046E382 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C6434E1E0CB97D0046E382 /* PlayViewController.swift */; };
 		90C643511E0CB9C00046E382 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C643501E0CB9C00046E382 /* PhotoViewController.swift */; };
 		90C643531E0CBB9F0046E382 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C643521E0CBB9F0046E382 /* Helper.swift */; };
+		90C643551E0CD92F0046E382 /* GifGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C643541E0CD92F0046E382 /* GifGenerator.swift */; };
 		D9FF4C0FB1C858C0607F4BAD /* Pods_FotoDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5711C5FD0E3002F9FBD89043 /* Pods_FotoDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		90C6434E1E0CB97D0046E382 /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		90C643501E0CB9C00046E382 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		90C643521E0CBB9F0046E382 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		90C643541E0CD92F0046E382 /* GifGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifGenerator.swift; sourceTree = "<group>"; };
 		B714E5FEDCF25BC12C04289A /* Pods-FotoDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FotoDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FotoDemo/Pods-FotoDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F5B48ECD4F6E3D5243DDD7A8 /* Pods-FotoDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FotoDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FotoDemo/Pods-FotoDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 				901BBC351E0C22BD001B408E /* AlbumViewController.swift */,
 				90C6434E1E0CB97D0046E382 /* PlayViewController.swift */,
 				90C643521E0CBB9F0046E382 /* Helper.swift */,
+				90C643541E0CD92F0046E382 /* GifGenerator.swift */,
 			);
 			path = FotoDemo;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			files = (
 				901BBC361E0C22BD001B408E /* AlbumViewController.swift in Sources */,
 				90C643531E0CBB9F0046E382 /* Helper.swift in Sources */,
+				90C643551E0CD92F0046E382 /* GifGenerator.swift in Sources */,
 				901BBC341E0C0B40001B408E /* Photos.swift in Sources */,
 				901BBC241E0BDBA3001B408E /* ViewController.swift in Sources */,
 				901BBC221E0BDBA3001B408E /* AppDelegate.swift in Sources */,
