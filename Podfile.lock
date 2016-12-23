@@ -1,0 +1,24 @@
+PODS:
+  - Fusuma (1.0.0)
+
+DEPENDENCIES:
+  - Fusuma (from `https://github.com/indevizible/Fusuma.git`, branch `camera-only`, tag `1.0.1.1`)
+
+EXTERNAL SOURCES:
+  Fusuma:
+    :branch: camera-only
+    :git: https://github.com/indevizible/Fusuma.git
+    :tag: 1.0.1.1
+
+CHECKOUT OPTIONS:
+  Fusuma:
+    :commit: 5c3840cb19236c7afa4747bc9c036d1180378353
+    :git: https://github.com/indevizible/Fusuma.git
+    :tag: 1.0.1.1
+
+SPEC CHECKSUMS:
+  Fusuma: 256315ea7daed298f246f1ba5e49700bc664dd93
+
+PODFILE CHECKSUM: 356c71e51c1c6bd82ea90c0de066f68b368979bb
+
+COCOAPODS: 1.2.0.beta.1
